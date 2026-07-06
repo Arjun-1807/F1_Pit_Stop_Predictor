@@ -1,7 +1,240 @@
-/* App specific styling */
-.app-container {
+/* Dashboard Grid Layout */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 2rem;
+  margin-top: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Header Telemetry Branding */
+.dashboard-header {
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashboard-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.title-glow {
+  color: var(--f1-red);
+  text-shadow: 0 0 10px var(--f1-red-glow);
+}
+
+.system-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: rgba(0, 255, 135, 0.1);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  color: var(--f1-green);
+  border: 1px solid var(--f1-green);
+}
+
+/* Form Sections */
+.form-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 600px) {
+  .form-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+.section-title {
+  grid-column: 1 / -1;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--f1-red);
+  border-left: 3px solid var(--f1-red);
+  padding-left: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+/* Track Flag Toggle Buttons */
+.flag-toggles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.flag-toggle-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
   text-align: center;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 2rem;
+}
+
+/* Safety Car Flag Styles */
+.flag-sc {
+  color: var(--f1-yellow);
+}
+.flag-sc.active {
+  background: #f8d000;
+  border-color: #ffd12b;
+  color: #000000;
+  box-shadow: 0 0 15px rgba(248, 208, 0, 0.4);
+}
+
+/* Virtual Safety Car Flag Styles */
+.flag-vsc {
+  color: var(--f1-yellow);
+}
+.flag-vsc.active {
+  background: repeating-linear-gradient(
+    45deg,
+    #ffd12b,
+    #ffd12b 10px,
+    #000000 10px,
+    #000000 20px
+  );
+  border-color: #ffd12b;
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(255, 209, 43, 0.3);
+}
+
+/* Red Flag Styles */
+.flag-rf {
+  color: var(--f1-red);
+}
+.flag-rf.active {
+  background: var(--f1-red);
+  border-color: var(--f1-red-hover);
+  color: #ffffff;
+  box-shadow: 0 0 15px var(--f1-red-glow);
+  animation: flashRed 1s infinite alternate;
+}
+
+/* Dynamic Gauge Panel */
+.gauge-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+}
+
+.gauge-svg-container {
+  position: relative;
+  width: 200px;
+  height: 120px;
+  margin-bottom: 1rem;
+}
+
+.gauge-bg-path {
+  fill: none;
+  stroke: var(--border-color);
+  stroke-width: 14;
+  stroke-linecap: round;
+}
+
+.gauge-value-path {
+  fill: none;
+  stroke-width: 14;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.2, 1), stroke 0.3s ease;
+}
+
+.gauge-text {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+/* Recommendation Notification Panel */
+.recommendation-box {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 1.25rem;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 1.1rem;
+  transition: all var(--transition-speed) ease;
+}
+
+.recommendation-box.box-box {
+  background: rgba(225, 6, 0, 0.15);
+  border-color: var(--f1-red);
+  color: var(--text-white);
+  box-shadow: 0 0 20px var(--f1-red-glow);
+  animation: boxCallPulse 1s infinite alternate;
+}
+
+.recommendation-box.stay-out {
+  background: rgba(0, 255, 135, 0.1);
+  border-color: var(--f1-green);
+  color: var(--f1-green);
+  box-shadow: 0 0 20px var(--f1-green-glow);
+}
+
+.recommendation-box.no-data {
+  background: var(--bg-darker);
+  border-color: var(--border-color);
+  color: var(--text-muted);
+}
+
+/* Info Banner Items */
+.threshold-info {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+/* Animations */
+@keyframes flashRed {
+  0% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+@keyframes boxCallPulse {
+  0% {
+    box-shadow: 0 0 10px rgba(225, 6, 0, 0.3);
+    border-color: rgba(225, 6, 0, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 25px rgba(225, 6, 0, 0.75);
+    border-color: rgba(255, 30, 24, 1);
+  }
 }
