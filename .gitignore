@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data & cache
+data/raw/
+data/processed/
+f1_cache/
+
+# Models
+models/
+
+# Env files
+.env
