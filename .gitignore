@@ -18,6 +18,7 @@ f1_cache/
 
 # Models
 models/
+!models/best_model.pkl
 
 # Env files
 .env
