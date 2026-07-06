@@ -4,6 +4,9 @@ __pycache__/
 
 # Virtual environment
 venv/
+.venv/
+env/
+ENV/
 
 # Jupyter
 .ipynb_checkpoints/
@@ -18,3 +21,17 @@ models/
 
 # Env files
 .env
+.env.*
+
+# Frontend / Node
+node_modules/
+
+# Editor / IDE folders
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
