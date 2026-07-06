@@ -1,23 +1,234 @@
-/* Base resets and configuration */
+/* Custom variables defining F1 dark theme */
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color-scheme: dark;
-  color: #f3f4f6;
-  background-color: #0b0f19;
+  --font-family: 'Outfit', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Background and panel system */
+  --bg-darker: #0c0d12;
+  --bg-dark: #14161f;
+  --bg-card: #1b1d2a;
+  --bg-card-hover: #232637;
+  
+  /* Theme Highlights */
+  --f1-red: #e10600;
+  --f1-red-hover: #ff1e18;
+  --f1-red-glow: rgba(225, 6, 0, 0.45);
+  
+  --f1-yellow: #ffd12b;
+  --f1-yellow-glow: rgba(255, 209, 43, 0.35);
+  
+  --f1-green: #00ff87;
+  --f1-green-glow: rgba(0, 255, 135, 0.35);
+
+  --text-white: #ffffff;
+  --text-secondary: #a0aec0;
+  --text-muted: #64748b;
+  
+  --border-color: #2b2e3f;
+  --border-focus: #4b526f;
+  
+  --transition-speed: 0.25s;
+  --border-radius: 8px;
+}
+
+/* Reset and box-sizing */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  background-color: var(--bg-darker);
+  /* Carbon fiber micro-pattern in pure CSS */
+  background-image: 
+    radial-gradient(rgba(0, 0, 0, 0.15) 15%, transparent 16%),
+    radial-gradient(rgba(0, 0, 0, 0.15) 15%, transparent 16%),
+    linear-gradient(45deg, transparent 49%, var(--bg-dark) 49%, var(--bg-dark) 51%, transparent 51%),
+    linear-gradient(-45deg, transparent 49%, var(--bg-dark) 49%, var(--bg-dark) 51%, transparent 51%);
+  background-size: 16px 16px;
+  background-position: 0 0, 8px 8px, 0 0, 0 0;
+  color: var(--text-white);
+  font-family: var(--font-family);
+  min-height: 100vh;
+  line-height: 1.6;
 }
 
 #root {
-  width: 100%;
-  min-height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Core Layout Wrapper */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  width: 100%;
+}
+
+/* Typography styles */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-white);
+}
+
+p {
+  color: var(--text-secondary);
+}
+
+/* Cards & Panel Layouts */
+.f1-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  transition: all var(--transition-speed) ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glowing top borders on cards */
+.f1-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+  transition: all var(--transition-speed) ease;
+}
+
+.f1-card:hover::before {
+  background: linear-gradient(90deg, transparent, var(--f1-red), transparent);
+}
+
+.f1-card:hover {
+  border-color: var(--border-focus);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+/* Inputs, dropdowns and forms */
+.f1-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.f1-input-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+}
+
+.f1-input, .f1-select {
+  background-color: var(--bg-darker);
+  border: 1px solid var(--border-color);
+  color: var(--text-white);
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-radius);
+  font-size: 0.95rem;
+  font-family: inherit;
+  width: 100%;
+  outline: none;
+  transition: all var(--transition-speed) ease;
+}
+
+.f1-input:focus, .f1-select:focus {
+  border-color: var(--f1-red);
+  box-shadow: 0 0 0 2px var(--f1-red-glow);
+}
+
+/* Buttons */
+.f1-btn {
+  background-color: var(--f1-red);
+  color: var(--text-white);
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 0.85rem 1.5rem;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all var(--transition-speed) ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 12px var(--f1-red-glow);
+}
+
+.f1-btn:hover {
+  background-color: var(--f1-red-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px var(--f1-red-glow);
+}
+
+.f1-btn:active {
+  transform: translateY(1px);
+}
+
+.f1-btn:disabled {
+  background-color: var(--text-muted);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* F1 Compounds styling */
+.compound-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-weight: 800;
+  font-size: 0.9rem;
+  border: 3px solid;
+}
+
+.compound-soft {
+  background-color: #000;
+  border-color: var(--f1-red);
+  color: var(--f1-red);
+}
+
+.compound-medium {
+  background-color: #000;
+  border-color: var(--f1-yellow);
+  color: var(--f1-yellow);
+}
+
+.compound-hard {
+  background-color: #000;
+  border-color: var(--text-white);
+  color: var(--text-white);
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-darker);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-focus);
 }
