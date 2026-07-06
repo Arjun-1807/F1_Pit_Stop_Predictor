@@ -96,10 +96,31 @@ function App() {
   // Update text/number inputs
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: name === 'circuit_key' ? value : Number(value)
-    }));
+    if (name === 'circuit_key') {
+      // Clean slate on track change to prevent lingering history and slow sector times
+      setStintHistory([]);
+      setPrediction(null);
+      setFormData(prev => ({
+        ...prev,
+        circuit_key: value,
+        LapNumber: 1,
+        Position: 10,
+        Stint: 1,
+        TyreLife: 1.0,
+        fresh_tyre: 1,
+        Sector1Time: 32.5,
+        Sector2Time: 38.0,
+        Sector3Time: 26.5,
+        sc_active: 0,
+        vsc_active: 0,
+        red_flag: 0
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: Number(value)
+      }));
+    }
   };
 
   // Toggle track condition flags (SC, VSC, Red Flag)
@@ -200,7 +221,10 @@ function App() {
       LapNumber: prev.LapNumber + 1, // Proceed to next lap
       TyreLife: 1.0, // Reset tyre life to 1
       Stint: prev.Stint + 1, // Advance stint number
-      fresh_tyre: 1 // Starting stint on fresh tyres
+      fresh_tyre: 1, // Starting stint on fresh tyres
+      Sector1Time: 32.5, // Reset to fresh pace sector times
+      Sector2Time: 38.0,
+      Sector3Time: 26.5
     }));
   };
 
